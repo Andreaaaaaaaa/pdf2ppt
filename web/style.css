@@ -1,0 +1,339 @@
+:root {
+    /* Notebook LM Dark Mode Inspired Palette */
+    --bg-color: #000000;
+    --card-bg: rgba(20, 20, 20, 0.8);
+    --card-border: rgba(255, 255, 255, 0.1);
+    --primary: #ffffff;
+    /* Stark white for accents */
+    --primary-hover: #e0e0e0;
+    --text-main: #ffffff;
+    --text-sub: #a0a0a0;
+    --accent-glow: rgba(255, 255, 255, 0.15);
+    --input-bg: rgba(255, 255, 255, 0.05);
+    --success: #4ade80;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    background-color: var(--bg-color);
+    color: var(--text-main);
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow-x: hidden;
+    position: relative;
+}
+
+/* Dynamic Background Animation */
+body::before {
+    content: '';
+    position: fixed;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle at center, rgba(30, 30, 30, 1) 0%, #000000 60%);
+    z-index: -2;
+}
+
+body::after {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background:
+        radial-gradient(circle at 15% 50%, rgba(255, 255, 255, 0.03) 0%, transparent 25%),
+        radial-gradient(circle at 85% 30%, rgba(255, 255, 255, 0.03) 0%, transparent 25%);
+    animation: pulse 10s ease-in-out infinite alternate;
+    z-index: -1;
+}
+
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+        opacity: 0.5;
+    }
+
+    100% {
+        transform: scale(1.1);
+        opacity: 0.8;
+    }
+}
+
+.container {
+    width: 100%;
+    max-width: 600px;
+    padding: 20px;
+    position: relative;
+    z-index: 1;
+}
+
+header {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+header h1 {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 10px;
+    background: linear-gradient(to right, #fff, #888);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    letter-spacing: -0.02em;
+}
+
+header p {
+    font-size: 1.1rem;
+    color: var(--text-sub);
+}
+
+.card {
+    background: var(--card-bg);
+    padding: 40px;
+    border-radius: 24px;
+    border: 1px solid var(--card-border);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+}
+
+.upload-area {
+    border: 2px dashed var(--card-border);
+    border-radius: 16px;
+    padding: 40px;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-bottom: 20px;
+    background: var(--input-bg);
+    color: var(--text-sub);
+}
+
+.upload-area:hover,
+.upload-area.dragover {
+    border-color: var(--primary);
+    background: rgba(255, 255, 255, 0.08);
+    color: var(--text-main);
+}
+
+.icon {
+    font-size: 3rem;
+    margin-bottom: 15px;
+    filter: grayscale(100%);
+}
+
+.browse-btn {
+    color: var(--primary);
+    font-weight: 600;
+    text-decoration: none;
+    border-bottom: 1px solid var(--primary);
+}
+
+#file-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: var(--input-bg);
+    padding: 12px 20px;
+    border-radius: 12px;
+    margin-bottom: 30px;
+    border: 1px solid var(--card-border);
+}
+
+#filename {
+    color: var(--text-main);
+    font-family: monospace;
+}
+
+#remove-file {
+    background: none;
+    border: none;
+    color: var(--text-sub);
+    cursor: pointer;
+    font-size: 1.2rem;
+    transition: color 0.2s;
+}
+
+#remove-file:hover {
+    color: var(--primary);
+}
+
+.settings {
+    margin-bottom: 30px;
+}
+
+.setting-group {
+    margin-bottom: 25px;
+}
+
+.setting-group label {
+    display: block;
+    font-weight: 500;
+    margin-bottom: 12px;
+    color: var(--text-sub);
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.radio-group {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+}
+
+.radio-card {
+    border: 1px solid var(--card-border);
+    border-radius: 12px;
+    padding: 15px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    display: flex;
+    flex-direction: column;
+    background: var(--input-bg);
+}
+
+.radio-card:hover {
+    background: rgba(255, 255, 255, 0.08);
+}
+
+.radio-card input {
+    display: none;
+}
+
+.radio-card.selected {
+    border-color: var(--primary);
+    background: rgba(255, 255, 255, 0.1);
+    box-shadow: 0 0 15px var(--accent-glow);
+}
+
+.radio-title {
+    font-weight: 600;
+    margin-bottom: 4px;
+    color: var(--text-main);
+}
+
+.radio-desc {
+    font-size: 0.8rem;
+    color: var(--text-sub);
+}
+
+input[type="range"] {
+    width: 100%;
+    accent-color: var(--primary);
+    background: transparent;
+}
+
+.button-group {
+    display: flex;
+    gap: 15px;
+}
+
+#convert-btn {
+    flex: 2;
+    padding: 16px;
+    background: var(--primary);
+    color: black;
+    border: none;
+    border-radius: 12px;
+    font-size: 1.1rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.secondary-btn {
+    flex: 1;
+    padding: 16px;
+    background: transparent;
+    color: var(--primary);
+    border: 2px solid var(--primary);
+    border-radius: 12px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.secondary-btn:disabled {
+    border-color: #333;
+    color: #666;
+    cursor: not-allowed;
+}
+
+.secondary-btn:hover:not(:disabled) {
+    background: rgba(255, 255, 255, 0.1);
+    box-shadow: 0 0 15px rgba(255, 255, 255, 0.1);
+    transform: translateY(-1px);
+}
+
+#convert-btn:disabled {
+    background: #333;
+    color: #666;
+    cursor: not-allowed;
+}
+
+#convert-btn:hover:not(:disabled) {
+    background: var(--primary-hover);
+    box-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
+    transform: translateY(-1px);
+}
+
+.hidden {
+    display: none !important;
+}
+
+#loading-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8);
+    backdrop-filter: blur(5px);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    z-index: 100;
+}
+
+.spinner {
+    width: 50px;
+    height: 50px;
+    border: 3px solid rgba(255, 255, 255, 0.1);
+    border-top: 3px solid var(--primary);
+    border-radius: 50%;
+    animation: spin 1s cubic-bezier(0.68, -0.55, 0.27, 1.55) infinite;
+    margin-bottom: 20px;
+}
+
+#loading-overlay p {
+    color: var(--text-main);
+    font-weight: 500;
+    letter-spacing: 0.05em;
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}

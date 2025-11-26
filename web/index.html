@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PDF to PPT Converter</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <div class="container">
+        <header>
+            <h1>PDF to PPT Converter</h1>
+            <p>Transform your documents into editable presentations with ease.</p>
+        </header>
+
+        <main>
+            <div class="card">
+                <div class="upload-area" id="drop-zone">
+                    <div class="icon">📄</div>
+                    <h3>Drag & Drop your PDF here</h3>
+                    <p>or <span class="browse-btn">browse files</span></p>
+                    <input type="file" id="file-input" accept=".pdf" hidden>
+                </div>
+                <div id="file-info" class="hidden">
+                    <span id="filename">filename.pdf</span>
+                    <button id="remove-file">✕</button>
+                </div>
+
+                <div class="settings">
+                    <div class="setting-group">
+                        <label>Conversion Mode</label>
+                        <div class="radio-group">
+                            <label class="radio-card selected" data-value="image">
+                                <input type="radio" name="mode" value="image" checked>
+                                <span class="radio-title">High Fidelity</span>
+                                <span class="radio-desc">Image-based, perfect layout.</span>
+                            </label>
+                            <label class="radio-card" data-value="separated">
+                                <input type="radio" name="mode" value="separated">
+                                <span class="radio-title">Editable</span>
+                                <span class="radio-desc">Separated text & images.</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="setting-group" id="dpi-group">
+                        <label>Image Quality (DPI): <span id="dpi-value">200</span></label>
+                        <input type="range" id="dpi-slider" min="72" max="400" value="200" step="10">
+                    </div>
+                </div>
+
+                <div class="button-group">
+                    <button id="convert-btn" disabled>Convert to PPT</button>
+                    <button id="extract-text-btn" class="secondary-btn" disabled>Extract Text (.txt)</button>
+                </div>
+            </div>
+        </main>
+
+        <div id="loading-overlay" class="hidden">
+            <div class="spinner"></div>
+            <p>Converting...</p>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+
+</html>

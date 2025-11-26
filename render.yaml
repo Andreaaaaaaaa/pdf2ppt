@@ -1,0 +1,11 @@
+services:
+  - type: web
+    name: pdf2ppt-converter
+    env: python
+    buildCommand: pip install -r requirements.txt
+    startCommand: python api.py
+    plan: free
+    healthCheckPath: /
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.11.1
