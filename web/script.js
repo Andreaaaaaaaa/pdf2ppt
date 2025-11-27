@@ -103,8 +103,15 @@ document.addEventListener('DOMContentLoaded', () => {
             });
 
             if (!response.ok) {
-                const errorData = await response.json();
-                throw new Error(errorData.detail || 'Conversion failed');
+                let errorMessage = 'Conversion failed';
+                try {
+                    const errorData = await response.json();
+                    errorMessage = errorData.detail || errorMessage;
+                } catch (e) {
+                    // If response is not JSON, use status text
+                    errorMessage = response.statusText || errorMessage;
+                }
+                throw new Error(errorMessage);
             }
 
             const blob = await response.blob();
@@ -141,8 +148,15 @@ document.addEventListener('DOMContentLoaded', () => {
             });
 
             if (!response.ok) {
-                const errorData = await response.json();
-                throw new Error(errorData.detail || 'Extraction failed');
+                let errorMessage = 'Extraction failed';
+                try {
+                    const errorData = await response.json();
+                    errorMessage = errorData.detail || errorMessage;
+                } catch (e) {
+                    // If response is not JSON, use status text
+                    errorMessage = response.statusText || errorMessage;
+                }
+                throw new Error(errorMessage);
             }
 
             const blob = await response.blob();

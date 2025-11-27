@@ -34,7 +34,7 @@ async def convert_pdf(
         traceback.print_exc()
         return JSONResponse(
             status_code=500,
-            content={"detail": str(e)}
+            content={"detail": f"Text extraction error: {str(e)}"}
         )
 
 @app.post("/extract_text")
@@ -56,7 +56,7 @@ async def extract_text(file: UploadFile = File(...)):
         traceback.print_exc()
         return JSONResponse(
             status_code=500,
-            content={"detail": str(e)}
+            content={"detail": f"Text extraction error: {str(e)}"}
         )
 
 # Mount static files (after API routes to avoid interception)
